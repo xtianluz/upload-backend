@@ -1,9 +1,26 @@
 const express = require('express')
 const app = express()
 const multer = require('multer')
+const cors = require('cors')
+
+app.use(cors())
+app.use(express.json())
 
 //express.static make the folder path '/uploads'+filename available in the browser
 app.use('/uploads', express.static('uploads'))
+
+let users = [
+    {
+        id: 1,
+        username: 'xtian',
+        password: 'asdf'
+    },
+    {
+        id: 2,
+        username: 'sliverback',
+        password: '123'
+    }
+]
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -24,24 +41,14 @@ const fileFilter = (req,file,cb) => {
 
 const upload = multer({
     storage: storage,
+    // preservePath: true,
     limits: {
         fileSize: 1024 * 1024 * 6,
     },
     fileFilter: fileFilter
-}).single('img');
+}).single('image');
 
-let users = [
-    {
-        id: 1,
-        username: 'xtian',
-        password: 'asdf'
-    },
-    {
-        id: 2,
-        username: 'sliverback',
-        password: '123'
-    }
-]
+
 
 // simplest form here
 // app.post('/uploads', upload.single("img"), (req, res) => {
@@ -49,7 +56,6 @@ let users = [
 //     res.send('Upload successful!')
 
 // })
-
 
 //complex form
 app.post('/uploads', function (req, res) {
@@ -64,10 +70,10 @@ app.post('/uploads', function (req, res) {
       }
   
       // Everything went fine.
-      res.send('Upload successful!')
+      res.send(req.file)
       console.log(req.file)
     })
-  })
+})
 
 
 app.get('/',(req, res) => {
@@ -78,6 +84,6 @@ app.get('/api/users', (req, res) => {
     res.json(users)
 })
 
-const PORT = 3001
+const PORT = 5000
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
