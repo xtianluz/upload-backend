@@ -3,11 +3,14 @@ const app = express()
 const multer = require('multer')
 const cors = require('cors')
 
+
 app.use(cors())
 app.use(express.json())
 
 //express.static make the folder path '/uploads'+filename available in the browser
 app.use('/uploads', express.static('uploads'))
+
+
 
 let users = [
     {
@@ -21,6 +24,8 @@ let users = [
         password: '123'
     }
 ]
+
+
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -74,7 +79,6 @@ app.post('/uploads', function (req, res) {
       console.log(req.file)
     })
 })
-
 
 app.get('/',(req, res) => {
     res.send('<h1>Coming soon...</h1>')
