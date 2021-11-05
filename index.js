@@ -11,22 +11,6 @@ app.use(express.json())
 app.use('/uploads', express.static('uploads'))
 
 
-
-let users = [
-    {
-        id: 1,
-        username: 'xtian',
-        password: 'asdf'
-    },
-    {
-        id: 2,
-        username: 'sliverback',
-        password: '123'
-    }
-]
-
-
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads')
@@ -56,7 +40,7 @@ const upload = multer({
 
 
 // simplest form here
-// app.post('/uploads', upload.single("img"), (req, res) => {
+// app.post('/uploads', upload.single("image"), (req, res) => {
 //     console.log(req.file)
 //     res.send('Upload successful!')
 
@@ -85,7 +69,7 @@ app.get('/',(req, res) => {
 })
 
 app.get('/api/users', (req, res) => {
-    res.json(users)
+    res.json([])
 })
 
 const PORT = 5000

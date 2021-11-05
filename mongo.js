@@ -12,18 +12,18 @@ const userSchema = new mongoose.Schema({
 const users = mongoose.model('users', userSchema)
 
 const username = new users({
-    firstname: 'xtianluz'
+    firstname: 'nicolleen'
 })
 
-// username.save().then((result) => {
-//     console.log('username saved!');
-//     mongoose.connection.close()
-// })
-
-users.find({})
-.then(res => {
-    res.forEach(items => {
-        console.log(items)
-    })
+username.save().then((result) => {
+    console.log('username saved!');
     mongoose.connection.close()
 })
+
+// users.find({})
+// .then(res => {
+//     res.forEach(items => {
+//         console.log(items)
+//     })
+//     mongoose.connection.close()
+// })
