@@ -85,7 +85,8 @@ app.post('/uploads', function (req, res) {
       sellerUpload.save()
       .then((result) => {
           console.log('Seller upload saved!')
-          mongoose.connection.close()
+         //when db is closed unable to retrieve the datas so keep open
+        //   mongoose.connection.close()
           console.log('Mongodb closed!')
       })
       res.send(req.file)
