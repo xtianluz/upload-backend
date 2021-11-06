@@ -13,7 +13,12 @@ app.use(express.json())
 app.use('/uploads', express.static('uploads'))
 
 //--------------------------------------------------mongoose block
-mongoose.connect('mongodb://localhost:27017/myFirstDB')
+const mongoUsername = process.env.MONGO_USERNAME
+const mongoPwd = process.env.MONGO_PASSWORD
+const clusterUrl = "localhost:27017/myFirstDB"
+const uri = `mongodb://${mongoUsername}:${mongoPwd}@${clusterUrl}`
+
+mongoose.connect(uri)
 .then(() => {
     console.log('Mongodb connected...')
 })
