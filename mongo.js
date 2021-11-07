@@ -6,7 +6,7 @@ const mongoPwd = process.env.MONGO_PASSWORD
 const clusterUrl = "localhost:27017/myFirstDB"
 
 const uri = `mongodb://${mongoUsername}:${mongoPwd}@${clusterUrl}`
-// const uri = 'mongodb://myUserAdmin:admin123@localhost:27017/myFirstDB'
+
 
 mongoose.connect(uri)
 .then(() => {
